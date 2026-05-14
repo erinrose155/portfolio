@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Erin Weirrick — Content Strategist & B2B Story Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300;1,9..40,400&display=swap" rel="stylesheet">
+
+<style>
+  /* ── TOKENS ─────────────────────────────────────────── */
+  :root {
+    --cream:      #FAF6EF;
+    --cream-dark: #F0E9DC;
+    --raspberry:  #C8385A;
+    --raspberry-light: #F5D0D8;
+    --marigold:   #F0A500;
+    --marigold-light: #FDE8B0;
+    --sage:       #6BAA8E;
+    --sage-light: #D4EDE4;
+    --ink:        #2C2C2A;
+    --ink-mid:    #5a5040;
+    --ink-light:  #9a9080;
+
+    --font-serif: 'DM Serif Display', Georgia, serif;
+    --font-sans:  'DM Sans', system-ui, sans-serif;
+
+    --nav-h: 68px;
+    --max-w: 1160px;
+    --radius: 12px;
+    --radius-sm: 6px;
+  }
+
+  /* ── RESET ───────────────────────────────────────────── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  img { max-width: 100%; display: block; }
+  a { color: inherit; text-decoration: none; }
+
+  /* ── NAV ─────────────────────────────────────────────── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: var(--nav-h);
+    background: var(--cream);
+    border-bottom: 1px solid var(--cream-dark);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2.5rem;
+    z-index: 100;
+  }
+  .nav-logo {
+    font-family: var(--font-serif);
+    font-size: 1.25rem;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+  }
+  .nav-logo span { color: var(--raspberry); }
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+    font-size: 0.875rem;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+  }
+  .nav-links a {
+    color: var(--ink-mid);
+    transition: color 0.2s;
+    position: relative;
+  }
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px; left: 0; right: 0;
+    height: 1.5px;
+    background: var(--raspberry);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.25s ease;
+  }
+  .nav-links a:hover { color: var(--ink); }
+  .nav-links a:hover::after { transform: scaleX(1); }
+  .nav-cta {
+    font-size: 0.8125rem;
+    font-weight: 500;
+    background: var(--ink);
+    color: var(--cream) !important;
+    padding: 0.5rem 1.25rem;
+    border-radius: 100px;
+    transition: background 0.2s, color 0.2s !important;
+  }
+  .nav-cta:hover { background: var(--raspberry) !important; }
+  .nav-cta::after { display: none !important; }
+
+  /* ── LAYOUT UTIL ─────────────────────────────────────── */
+  .container {
+    max-width: var(--max-w);
+    margin: 0 auto;
+    padding: 0 2.5rem;
+  }
+  section { padding: 6rem 0; }
+
+  /* ── HERO ────────────────────────────────────────────── */
+  #hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding-top: var(--nav-h);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-confetti {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .confetti-dot {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.18;
+  }
+  .hero-inner {
+    position: relative;
+    z-index: 1;
+    max-width: var(--max-w);
+    margin: 0 auto;
+    padding: 0 2.5rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+  .hero-eyebrow {
+    font-family: var(--font-sans);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--raspberry);
+    margin-bottom: 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 24px;
+    height: 1.5px;
+    background: var(--raspberry);
+  }
+  .hero-headline {
+    font-family: var(--font-serif);
+    font-size: clamp(2.75rem, 5vw, 4.25rem);
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: 1.5rem;
+  }
+  .hero-headline em {
+    font-style: italic;
+    color: var(--raspberry);
+  }
+  .hero-headline .accent-word {
+    position: relative;
+    display: inline-block;
+  }
+  .hero-headline .accent-word::after {
+    content: '';
+    position: absolute;
+    bottom: 4px; left: 0; right: 0;
+    height: 3px;
+    background: var(--marigold);
+    border-radius: 2px;
+  }
+  .hero-body {
+    font-size: 1.0625rem;
+    color: var(--ink-mid);
+    line-height: 1.75;
+    margin-bottom: 2.5rem;
+    max-width: 480px;
+  }
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding: 0.8rem 1.75rem;
+    border-radius: 100px;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s ease;
+    text-decoration: none;
+  }
+  .btn-primary {
+    background: var(--raspberry);
+    color: white;
+  }
+  .btn-primary:hover { background: #a82a48; transform: translateY(-1px); }
+  .btn-secondary {
+    background: transparent;
+    color: var(--ink);
+    border: 1.5px solid var(--ink);
+  }
+  .btn-secondary:hover { background: var(--ink); color: var(--cream); transform: translateY(-1px); }
+
+  /* hero right — stat cards */
+  .hero-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+  .stat-card {
+    background: white;
+    border: 1px solid var(--cream-dark);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .stat-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(44,44,42,0.08); }
+  .stat-card.accent-raspberry { border-top: 3px solid var(--raspberry); }
+  .stat-card.accent-marigold  { border-top: 3px solid var(--marigold); }
+  .stat-card.accent-sage      { border-top: 3px solid var(--sage); }
+  .stat-card.accent-ink       { border-top: 3px solid var(--ink); }
+  .stat-num {
+    font-family: var(--font-serif);
+    font-size: 2.5rem;
+    line-height: 1;
+    color: var(--ink);
+    margin-bottom: 0.25rem;
+  }
+  .stat-label {
+    font-size: 0.8125rem;
+    color: var(--ink-light);
+    line-height: 1.4;
+  }
+
+  /* ── SECTION HEADERS ─────────────────────────────────── */
+  .section-eyebrow {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--raspberry);
+    margin-bottom: 0.75rem;
+  }
+  .section-headline {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 3.5vw, 2.75rem);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: 1rem;
+  }
+  .section-sub {
+    font-size: 1rem;
+    color: var(--ink-mid);
+    max-width: 540px;
+    line-height: 1.75;
+  }
+  .section-header { margin-bottom: 3.5rem; }
+
+  /* ── EXPERIENCE EXPLORER ─────────────────────────────── */
+  #experience { background: white; }
+  .experience-grid {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 0;
+    border: 1px solid var(--cream-dark);
+    border-radius: var(--radius);
+    overflow: hidden;
+    min-height: 480px;
+  }
+  .exp-list {
+    border-right: 1px solid var(--cream-dark);
+    background: var(--cream);
+    overflow-y: auto;
+    max-height: 600px;
+  }
+  .exp-item {
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid var(--cream-dark);
+    cursor: pointer;
+    transition: background 0.15s;
+    position: relative;
+  }
+  .exp-item:hover { background: var(--cream-dark); }
+  .exp-item.active {
+    background: white;
+    border-right: 3px solid var(--raspberry);
+    margin-right: -1px;
+  }
+  .exp-item-role {
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: var(--ink);
+    margin-bottom: 0.2rem;
+  }
+  .exp-item-org {
+    font-size: 0.8rem;
+    color: var(--ink-light);
+  }
+  .exp-item-date {
+    font-size: 0.75rem;
+    color: var(--ink-light);
+    margin-top: 0.2rem;
+  }
+  .exp-tabs {
+    display: flex;
+    gap: 0;
+    margin-bottom: 0;
+    border-bottom: none;
+  }
+  .exp-tab {
+    font-family: var(--font-sans);
+    font-size: 0.875rem;
+    font-weight: 400;
+    padding: 0.75rem 1.5rem;
+    background: var(--cream-dark);
+    color: var(--ink-mid);
+    border: 1px solid var(--cream-dark);
+    border-bottom: none;
+    cursor: pointer;
+    transition: all 0.18s;
+    border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+    margin-right: 4px;
+    position: relative;
+    bottom: -1px;
+  }
+  .exp-tab:hover { color: var(--ink); background: #e8dfd0; }
+  .exp-tab.active {
+    background: white;
+    color: var(--raspberry);
+    font-weight: 500;
+    border-color: var(--cream-dark);
+    border-bottom-color: white;
+  }
+  .exp-panel { display: block; }
+  .exp-panel.hidden { display: none; }
+  .exp-detail {
+    padding: 2rem 2.5rem;
+    background: white;
+  }
+  .exp-detail-role {
+    font-family: var(--font-serif);
+    font-size: 1.75rem;
+    color: var(--ink);
+    margin-bottom: 0.25rem;
+  }
+  .exp-detail-org {
+    font-size: 0.9rem;
+    color: var(--raspberry);
+    font-weight: 500;
+    margin-bottom: 1.25rem;
+  }
+  .exp-detail-body {
+    font-size: 0.9375rem;
+    color: var(--ink-mid);
+    line-height: 1.75;
+    margin-bottom: 2rem;
+  }
+  .skills-label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-light);
+    margin-bottom: 0.75rem;
+  }
+  .skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .skill-tag {
+    font-size: 0.8125rem;
+    padding: 0.35rem 0.85rem;
+    border-radius: 100px;
+    font-weight: 400;
+    cursor: default;
+    transition: transform 0.15s;
+  }
+  .skill-tag:hover { transform: scale(1.05); }
+  .skill-tag.raspberry { background: var(--raspberry-light); color: var(--raspberry); }
+  .skill-tag.marigold  { background: var(--marigold-light);  color: #7a5200; }
+  .skill-tag.sage      { background: var(--sage-light);      color: #2a6b54; }
+  .skill-tag.ink       { background: var(--cream-dark);      color: var(--ink-mid); }
+
+  /* ── WORK SAMPLES ────────────────────────────────────── */
+  #work { background: var(--cream); }
+  .work-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+  .work-card {
+    background: white;
+    border: 1px solid var(--cream-dark);
+    border-radius: var(--radius);
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+  }
+  .work-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(44,44,42,0.1); }
+  .work-card-thumb {
+    height: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    font-style: italic;
+    color: white;
+    letter-spacing: -0.01em;
+  }
+  .work-card-thumb.bg-raspberry { background: var(--raspberry); }
+  .work-card-thumb.bg-marigold  { background: var(--marigold); color: var(--ink); }
+  .work-card-thumb.bg-sage      { background: var(--sage); }
+  .work-card-thumb.bg-ink       { background: var(--ink); }
+  .work-card-body { padding: 1.25rem; }
+  .work-card-type {
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-light);
+    margin-bottom: 0.4rem;
+  }
+  .work-card-title {
+    font-family: var(--font-serif);
+    font-size: 1.125rem;
+    color: var(--ink);
+    line-height: 1.3;
+    margin-bottom: 0.5rem;
+  }
+  .work-card-desc {
+    font-size: 0.85rem;
+    color: var(--ink-light);
+    line-height: 1.6;
+  }
+
+  /* ── FOR EMPLOYERS ────────────────────────────────────── */
+  #employers {
+    background: var(--ink);
+    color: var(--cream);
+  }
+  #employers .section-eyebrow { color: var(--marigold); }
+  #employers .section-headline { color: var(--cream); }
+  #employers .section-sub { color: var(--ink-light); }
+  .brand-statement {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-left: 4px solid var(--raspberry);
+    border-radius: var(--radius-sm);
+    padding: 1.75rem 2rem;
+    font-family: var(--font-serif);
+    font-size: 1.25rem;
+    font-style: italic;
+    line-height: 1.6;
+    color: var(--cream);
+    margin-bottom: 2.5rem;
+  }
+  .role-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-bottom: 2.5rem;
+  }
+  .role-tag {
+    font-size: 0.875rem;
+    padding: 0.5rem 1.25rem;
+    border-radius: 100px;
+    border: 1px solid rgba(255,255,255,0.2);
+    color: var(--cream);
+    transition: all 0.2s;
+  }
+  .role-tag:hover { background: var(--raspberry); border-color: var(--raspberry); }
+
+  /* ── ABOUT / FULLER ERIN ─────────────────────────────── */
+  #about { background: white; }
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+  }
+  .about-headline {
+    font-family: var(--font-serif);
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
+    line-height: 1.2;
+    color: var(--ink);
+    margin-bottom: 1.25rem;
+  }
+  .about-headline em { color: var(--raspberry); font-style: italic; }
+  .about-body {
+    font-size: 1rem;
+    color: var(--ink-mid);
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+  }
+  .hobby-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+  }
+  .hobby-chip {
+    font-size: 0.875rem;
+    padding: 0.4rem 1rem;
+    border-radius: 100px;
+    background: var(--cream);
+    border: 1px solid var(--cream-dark);
+    color: var(--ink-mid);
+  }
+  .about-visual {
+    position: relative;
+    height: 420px;
+  }
+  .about-photo {
+    position: absolute;
+    border-radius: var(--radius);
+    border: 3px solid;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(44,44,42,0.12);
+  }
+  .about-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .about-photo-1 {
+    width: 260px; height: 200px;
+    top: 0; left: 0;
+  }
+  .about-photo-2 {
+    width: 180px; height: 180px;
+    top: 40px; right: 0;
+  }
+  .about-photo-3 {
+    width: 220px; height: 180px;
+    bottom: 0; left: 30px;
+  }
+
+  /* ── FOOTER ──────────────────────────────────────────── */
+  footer {
+    background: var(--cream);
+    border-top: 1px solid var(--cream-dark);
+    padding: 3rem 0;
+    text-align: center;
+  }
+  .footer-name {
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    color: var(--ink);
+    margin-bottom: 0.5rem;
+  }
+  .footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    list-style: none;
+    font-size: 0.875rem;
+    color: var(--ink-light);
+    margin-bottom: 1.5rem;
+  }
+  .footer-links a:hover { color: var(--raspberry); }
+  .footer-copy {
+    font-size: 0.8rem;
+    color: var(--ink-light);
+  }
+
+  /* ── ANIMATIONS ──────────────────────────────────────── */
+  @keyframes float-1 { 0%,100%{transform:translateY(0) rotate(0deg)} 50%{transform:translateY(-18px) rotate(4deg)} }
+  @keyframes float-2 { 0%,100%{transform:translateY(0) rotate(0deg)} 50%{transform:translateY(-12px) rotate(-3deg)} }
+  @keyframes float-3 { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-22px)} }
+  .float-1 { animation: float-1 7s ease-in-out infinite; }
+  .float-2 { animation: float-2 9s ease-in-out infinite 1s; }
+  .float-3 { animation: float-3 11s ease-in-out infinite 2s; }
+
+  .fade-in {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Erin <span>Weirrick</span></div>
+  <ul class="nav-links">
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#employers">For Employers</a></li>
+    <li><a href="mailto:erinrose155@gmail.com" class="nav-cta">Say hello</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <!-- confetti dots -->
+  <div class="hero-confetti" aria-hidden="true">
+    <div class="confetti-dot float-1" style="width:90px;height:90px;background:var(--raspberry);top:12%;left:60%;"></div>
+    <div class="confetti-dot float-2" style="width:52px;height:52px;background:var(--marigold);top:70%;left:72%;"></div>
+    <div class="confetti-dot float-3" style="width:120px;height:120px;background:var(--sage);top:55%;left:48%;"></div>
+    <div class="confetti-dot float-1" style="width:36px;height:36px;background:var(--raspberry);top:25%;left:52%;"></div>
+    <div class="confetti-dot float-2" style="width:64px;height:64px;background:var(--marigold);top:82%;left:62%;border-radius:8px;"></div>
+    <div class="confetti-dot float-3" style="width:28px;height:28px;background:var(--sage);top:40%;left:78%;"></div>
+  </div>
+
+  <div class="hero-inner">
+    <div class="hero-content fade-in">
+      <div class="hero-eyebrow">Content Strategist &amp; B2B Story Engineer</div>
+      <h1 class="hero-headline">
+        Stories that <em>move</em> people<br>
+        &amp; <span class="accent-word">numbers</span><br>
+        to prove it.
+      </h1>
+      <p class="hero-body">
+        Content-obsessed marketer turning complex ideas into narratives that are clear, compelling, and actually true — across the full funnel. Creative instinct informed by analysis. Data defended by story.
+      </p>
+      <div class="hero-actions">
+        <a href="#experience" class="btn btn-primary">Explore my work</a>
+        <a href="#employers" class="btn btn-secondary">For employers</a>
+      </div>
+    </div>
+
+    <div class="hero-stats fade-in" style="transition-delay:0.15s;">
+      <div class="stat-card accent-raspberry">
+        <div class="stat-num">37%</div>
+        <div class="stat-label">avg CTR vs. 27% team average</div>
+      </div>
+      <div class="stat-card accent-marigold">
+        <div class="stat-num">6/10</div>
+        <div class="stat-label">top-performing email campaigns, company-wide</div>
+      </div>
+      <div class="stat-card accent-sage">
+        <div class="stat-num">#1</div>
+        <div class="stat-label">email driver of site traffic, Q1 2026</div>
+      </div>
+      <div class="stat-card accent-ink">
+        <div class="stat-num">50%+</div>
+        <div class="stat-label">social following growth at Arts Place</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE EXPLORER -->
+<section id="experience">
+  <div class="container">
+    <div class="section-header fade-in">
+      <div class="section-eyebrow">Career Arc</div>
+      <h2 class="section-headline">Not just what I did —<br>what I built.</h2>
+      <p class="section-sub">Click into any role to see the skills underneath it. This is a career built on purpose, not accident.</p>
+    </div>
+
+    <!-- Tab bar -->
+    <div class="exp-tabs fade-in">
+      <button class="exp-tab active" onclick="switchTab('professional', this)">Professional</button>
+      <button class="exp-tab" onclick="switchTab('early', this)">Early Career</button>
+      <button class="exp-tab" onclick="switchTab('campus', this)">Campus &amp; Formative</button>
+    </div>
+
+    <div class="experience-grid fade-in">
+      <!-- sidebar -->
+      <div class="exp-list" id="exp-list">
+
+        <div class="exp-panel" id="panel-professional">
+          <div class="exp-item active" onclick="showExp('bizlib-content', this)">
+            <div class="exp-item-role">Content &amp; Campaigns Specialist</div>
+            <div class="exp-item-org">BizLibrary</div>
+            <div class="exp-item-date">Dec 2024 – Present</div>
+          </div>
+          <div class="exp-item" onclick="showExp('bizlib-sales', this)">
+            <div class="exp-item-role">Sales Enablement Specialist</div>
+            <div class="exp-item-org">BizLibrary</div>
+            <div class="exp-item-date">July 2022 – Dec 2024</div>
+          </div>
+          <div class="exp-item" onclick="showExp('artsplace', this)">
+            <div class="exp-item-role">Marketing Director</div>
+            <div class="exp-item-org">Arts Place, Inc.</div>
+            <div class="exp-item-date">Oct 2019 – June 2022</div>
+          </div>
+        </div>
+
+        <div class="exp-panel hidden" id="panel-early">
+          <div class="exp-item" onclick="showExp('infostreams', this)">
+            <div class="exp-item-role">Content Writer</div>
+            <div class="exp-item-org">InfoStreams Solutions</div>
+            <div class="exp-item-date">Oct 2019 – Feb 2020</div>
+          </div>
+          <div class="exp-item" onclick="showExp('brandit', this)">
+            <div class="exp-item-role">Content Writer &amp; Jr. Project Manager</div>
+            <div class="exp-item-org">BrandItMarketing</div>
+            <div class="exp-item-date">Oct 2019 – Feb 2020</div>
+          </div>
+          <div class="exp-item" onclick="showExp('odyssey', this)">
+            <div class="exp-item-role">Freelance Writer</div>
+            <div class="exp-item-org">Odyssey</div>
+            <div class="exp-item-date">Jan 2016 – Sep 2017</div>
+          </div>
+        </div>
+
+        <div class="exp-panel hidden" id="panel-campus">
+          <div class="exp-item" onclick="showExp('uf-internship', this)">
+            <div class="exp-item-role">Social Media Coordinator</div>
+            <div class="exp-item-org">University of Findlay</div>
+            <div class="exp-item-date">Internship · Jan–May 2019</div>
+          </div>
+          <div class="exp-item" onclick="showExp('writing-center', this)">
+            <div class="exp-item-role">Writing Center Tutor</div>
+            <div class="exp-item-org">University of Findlay</div>
+            <div class="exp-item-date">Jan 2017 – May 2019</div>
+          </div>
+          <div class="exp-item" onclick="showExp('slippery-elm', this)">
+            <div class="exp-item-role">Managing Editor</div>
+            <div class="exp-item-org">Slippery Elm Literary Magazine</div>
+            <div class="exp-item-date">Jan–May 2019</div>
+          </div>
+          <div class="exp-item" onclick="showExp('sigma-tau', this)">
+            <div class="exp-item-role">VP, Sigma Tau Delta</div>
+            <div class="exp-item-org">English Honor Society</div>
+            <div class="exp-item-date">Aug 2018 – May 2019</div>
+          </div>
+          <div class="exp-item" onclick="showExp('scribblers', this)">
+            <div class="exp-item-role">President, Scribblers' Circle</div>
+            <div class="exp-item-org">Writing Club</div>
+            <div class="exp-item-date">Aug 2017 – May 2019</div>
+          </div>
+          <div class="exp-item" onclick="showExp('ftwk', this)">
+            <div class="exp-item-role">Managing Editor</div>
+            <div class="exp-item-org">From the Writers' Kitchen</div>
+            <div class="exp-item-date">Aug 2017 – May 2019</div>
+          </div>
+          <div class="exp-item" onclick="showExp('education', this)">
+            <div class="exp-item-role">BA, English Creative Writing</div>
+            <div class="exp-item-org">University of Findlay</div>
+            <div class="exp-item-date">Cum Laude · May 2019</div>
+          </div>
+          <div class="exp-item" onclick="showExp('awards', this)">
+            <div class="exp-item-role">Writing Awards</div>
+            <div class="exp-item-org">Gebhardt &amp; Bruer Awards</div>
+            <div class="exp-item-date">2017 &amp; 2019</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- detail pane -->
+      <div class="exp-detail" id="exp-detail-pane">
+        <div class="exp-detail-role">Content &amp; Campaigns Specialist</div>
+        <div class="exp-detail-org">BizLibrary · Dec 2024 – Present</div>
+        <p class="exp-detail-body">Sole owner of Switch to Biz — a competitive steal email campaign that became the #1 email driver of website traffic in Q1 2026. Drives full-funnel content strategy across email, blog, ebooks, and sales channels, with a 37% average CTR against a 27% team average. Pioneered AI integration into content creation, authoring the company-wide rollout plan and governance policy.</p>
+        <div class="skills-label">Skills built here</div>
+        <div class="skill-tags">
+          <span class="skill-tag raspberry">Campaign Strategy & Execution</span>
+          <span class="skill-tag raspberry">Email Marketing</span>
+          <span class="skill-tag marigold">Content Strategy & Creation</span>
+          <span class="skill-tag marigold">Performance Analysis</span>
+          <span class="skill-tag sage">AI Strategy & Governance</span>
+          <span class="skill-tag sage">Brand Strategy & Voice</span>
+          <span class="skill-tag raspberry">Audience & Persona Research</span>
+          <span class="skill-tag marigold">Cross-Functional Collaboration</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WORK SAMPLES -->
+<section id="work">
+  <div class="container">
+    <div class="section-header fade-in">
+      <div class="section-eyebrow">Work Samples</div>
+      <h2 class="section-headline">The receipts.</h2>
+      <p class="section-sub">Claims are easy. Here's the actual work — blogs, campaigns, case studies, and the one project that never launched but absolutely should have.</p>
+    </div>
+
+    <div class="work-grid fade-in">
+      <div class="work-card">
+        <div class="work-card-thumb bg-raspberry">Blog Post</div>
+        <div class="work-card-body">
+          <div class="work-card-type">Content · BizLibrary</div>
+          <div class="work-card-title">Coming soon</div>
+          <div class="work-card-desc">Blog samples to be added.</div>
+        </div>
+      </div>
+      <div class="work-card">
+        <div class="work-card-thumb bg-marigold">Email</div>
+        <div class="work-card-body">
+          <div class="work-card-type">Campaign · BizLibrary</div>
+          <div class="work-card-title">Switch to Biz</div>
+          <div class="work-card-desc">The competitive steal campaign that became the #1 email driver of site traffic in Q1 2026.</div>
+        </div>
+      </div>
+      <div class="work-card">
+        <div class="work-card-thumb bg-sage">Case Study</div>
+        <div class="work-card-body">
+          <div class="work-card-type">Strategy · The Mascot Project</div>
+          <div class="work-card-title">The Campaign That Almost Was</div>
+          <div class="work-card-desc">Business case + rollout plan for a mascot campaign that got approved — and then didn't happen. The full story.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="fade-in">
+        <div class="section-eyebrow">The fuller picture</div>
+        <h2 class="about-headline">There's a <em>person</em><br>behind the strategy.</h2>
+        <p class="about-body">
+          Hi. I'm Erin. When I'm not turning over the data to see what's converting, performing up close and personal social listening (occasionally known as signing up for competitors' webinars.....guilty....) or arguing with the LLM of my choice, you can find me crafting, thrifting, playing video games (Any Sims fans in the house?) and spending time with my friends and family.
+        </p>
+        <p class="about-body">
+          I'm the eldest of four and the first person in my family to graduate college. I have lived in three states, three countries, three continents. And then I did something I thought I would never do — I decided to move back right into my hometown.
+        </p>
+        <div class="hobby-chips">
+          <span class="hobby-chip">I/ENFP</span>
+          <span class="hobby-chip">Enneagram 6</span>
+          <span class="hobby-chip">Oxford comma advocate</span>
+        </div>
+      </div>
+      <div class="about-visual fade-in" style="transition-delay:0.15s;" aria-hidden="true">
+        <div class="about-photo about-photo-1" style="border-color: var(--raspberry);">
+          <img src="photo-coffee.jpg" alt="Erin at a coffee shop">
+        </div>
+        <div class="about-photo about-photo-2" style="border-color: var(--marigold);">
+          <img src="photo-pets.jpg" alt="Erin's pets">
+        </div>
+        <div class="about-photo about-photo-3" style="border-color: var(--sage);">
+          <img src="photo-craft.jpg" alt="Erin's craft work">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOR EMPLOYERS -->
+<section id="employers">
+  <div class="container">
+    <div class="section-header fade-in">
+      <div class="section-eyebrow">For Employers</div>
+      <h2 class="section-headline">What you're actually hiring.</h2>
+      <p class="section-sub" style="color:var(--ink-light);">The honest version of what I bring, what I'm looking for, and whether we're a fit.</p>
+    </div>
+    <div class="fade-in">
+      <div class="brand-statement">
+        "Content-obsessed marketer skilled at turning complex ideas into narratives that are clear, compelling, and actually true across the full funnel. I lead with creative instinct that is informed by analysis and defend every decision with data — even though numbers aren't my favorite part of the job. I love finding the story they tell."
+      </div>
+      <div style="font-size:0.8125rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-light);margin-bottom:0.75rem;">Roles I'm targeting</div>
+      <div class="role-tags">
+        <span class="role-tag">Content Marketing Manager</span>
+        <span class="role-tag">Content &amp; Campaigns Specialist</span>
+        <span class="role-tag">Senior Content Strategist</span>
+        <span class="role-tag">Managing Editor</span>
+      </div>
+      <a href="mailto:erinrose155@gmail.com" class="btn btn-primary" style="margin-top:1rem;">Let's talk →</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-name">Erin Weirrick</div>
+  <ul class="footer-links">
+    <li><a href="mailto:erinrose155@gmail.com">erinrose155@gmail.com</a></li>
+    <li><a href="tel:4198521664">419-852-1664</a></li>
+    <li>Ohio, USA (EST)</li>
+  </ul>
+  <div class="footer-copy">Content Strategist &amp; B2B Story Engineer</div>
+</footer>
+
+<script>
+  const experiences = {
+    'bizlib-content': {
+      role: 'Content & Campaigns Specialist',
+      org: 'BizLibrary · Dec 2024 – Present',
+      body: 'Sole owner of Switch to Biz — a competitive steal email campaign that became the #1 email driver of website traffic in Q1 2026. Drives full-funnel content strategy across email, blog, ebooks, and sales channels, with a 37% average CTR against a 27% team average. Pioneered AI integration into content creation, authoring the company-wide rollout plan and governance policy.',
+      skills: [
+        {label:'Campaign Strategy & Execution',color:'raspberry'},
+        {label:'Email Marketing',color:'raspberry'},
+        {label:'Content Strategy & Creation',color:'marigold'},
+        {label:'Performance Analysis',color:'marigold'},
+        {label:'AI Strategy & Governance',color:'sage'},
+        {label:'Brand Strategy & Voice',color:'sage'},
+        {label:'Audience & Persona Research',color:'raspberry'},
+        {label:'Cross-Functional Collaboration',color:'marigold'}
+      ]
+    },
+    'bizlib-sales': {
+      role: 'Sales Enablement Specialist',
+      org: 'BizLibrary · July 2022 – Dec 2024',
+      body: 'Developed sales enablement materials — product sheets, messaging guides, proposal documents — translating complex product features into human stories about how BizLibrary would change the way people work. Launched a disruptive GTM campaign around a new product launch, driving awareness through unconventional B2B storytelling. Built prospecting and follow-up email sequences grounded in voice-of-customer research from recorded prospect calls and software review monitoring.',
+      skills: [
+        {label:'Sales Enablement',color:'raspberry'},
+        {label:'GTM Strategy',color:'raspberry'},
+        {label:'Messaging & Positioning',color:'marigold'},
+        {label:'Audience & Persona Research',color:'marigold'},
+        {label:'Product Fluency',color:'sage'},
+        {label:'Storytelling & Narrative',color:'sage'},
+        {label:'Email Marketing',color:'raspberry'},
+        {label:'Cross-Functional Collaboration',color:'marigold'}
+      ]
+    },
+    'artsplace': {
+      role: 'Marketing Director',
+      org: 'Arts Place, Inc. · Oct 2019 – June 2022',
+      body: 'Served as the sole marketing department for a three-location arts nonprofit — owning all content creation, campaign execution, and brand strategy across print, digital, radio, and email. Grew the combined social following by 50%+ and completely rebuilt the digital presence in the first year in collaboration with external agencies. Leveraged social listening and audience insights to anticipate trends and inform campaign strategy.',
+      skills: [
+        {label:'Brand Strategy & Voice',color:'raspberry'},
+        {label:'Campaign Strategy & Execution',color:'raspberry'},
+        {label:'Content Strategy & Creation',color:'marigold'},
+        {label:'Social Media Strategy',color:'marigold'},
+        {label:'Digital Strategy',color:'sage'},
+        {label:'Audience & Persona Research',color:'sage'},
+        {label:'Cross-Functional Collaboration',color:'raspberry'},
+        {label:'Independent Work & Initiative',color:'marigold'}
+      ]
+    },
+    'infostreams': {
+      role: 'Content Writer',
+      org: 'InfoStreams Solutions, Inc. · Oct 2019 – Feb 2020',
+      body: 'Created focused, enjoyable SEO blog and web content for B2B clients across multiple industries at a digital marketing agency. Operated on a fully remote, freelance basis — self-managed, deadline-driven, and team-collaborative from day one.',
+      skills: [
+        {label:'SEO',color:'raspberry'},
+        {label:'Content Strategy & Creation',color:'raspberry'},
+        {label:'Independent Work & Initiative',color:'marigold'},
+        {label:'Cross-Functional Collaboration',color:'marigold'},
+        {label:'Editing & Proofreading',color:'sage'}
+      ]
+    },
+    'brandit': {
+      role: 'Content Writer & Jr. Project Manager',
+      org: 'BrandItMarketing · Oct 2019 – Feb 2020',
+      body: 'At a midsized web design and marketing agency serving hometown brands and businesses, created editorial content calendars for both B2B and B2C clients. Conducted social media campaigns — paid and organic — and produced social media and blog content across client verticals.',
+      skills: [
+        {label:'Project & Editorial Management',color:'raspberry'},
+        {label:'Content Strategy & Creation',color:'raspberry'},
+        {label:'Social Media Strategy',color:'marigold'},
+        {label:'Campaign Strategy & Execution',color:'marigold'},
+        {label:'Cross-Functional Collaboration',color:'sage'}
+      ]
+    },
+    'odyssey': {
+      role: 'Freelance Writer',
+      org: 'Odyssey · Jan 2016 – Sep 2017',
+      body: 'Wrote creative articles that consistently drove traffic — and was the #1 shared author in the community. Managed all own projects, pitches, and deadlines through self-built calendars and tracking systems. An early lesson that good writing finds its audience.',
+      skills: [
+        {label:'Storytelling & Narrative',color:'raspberry'},
+        {label:'Content Strategy & Creation',color:'raspberry'},
+        {label:'Independent Work & Initiative',color:'marigold'},
+        {label:'Project & Editorial Management',color:'marigold'},
+        {label:'Performance Analysis',color:'sage'}
+      ]
+    },
+    'uf-internship': {
+      role: 'Social Media Coordinator (Internship)',
+      org: 'University of Findlay English Department · Jan–May 2019',
+      body: 'Built a social media presence for UF\'s English department from scratch — created and managed all content, built a WordPress website, analyzed metrics to inform content decisions, and developed a long-term content calendar with defined KPIs. A first taste of owning a brand voice end-to-end.',
+      skills: [
+        {label:'Social Media Strategy',color:'raspberry'},
+        {label:'Brand Strategy & Voice',color:'raspberry'},
+        {label:'Content Strategy & Creation',color:'marigold'},
+        {label:'Digital Strategy',color:'marigold'},
+        {label:'Performance Analysis',color:'sage'},
+        {label:'Project & Editorial Management',color:'sage'}
+      ]
+    },
+    'writing-center': {
+      role: 'Writing Center Tutor',
+      org: 'University of Findlay · Jan 2017 – May 2019',
+      body: 'Proofread and evaluated undergraduate and graduate papers from every discipline — not just English. Assessed structural issues, content quality, and argument strength, then collaborated with student writers to develop their best possible work. Two-plus years of teaching clear thinking through clear writing.',
+      skills: [
+        {label:'Editing & Proofreading',color:'raspberry'},
+        {label:'Storytelling & Narrative',color:'raspberry'},
+        {label:'Coaching & Feedback',color:'marigold'},
+        {label:'Research & Critical Thinking',color:'marigold'},
+        {label:'Cross-Functional Collaboration',color:'sage'}
+      ]
+    },
+    'slippery-elm': {
+      role: 'Managing Editor',
+      org: 'Slippery Elm Literary Magazine · Jan–May 2019',
+      body: 'Helped lead an international literary magazine that receives 700+ submissions per year — managing editorial process, selection, and publication. An early experience in operating at editorial scale and making high-stakes creative judgment calls.',
+      skills: [
+        {label:'Editorial Leadership',color:'raspberry'},
+        {label:'Project & Editorial Management',color:'raspberry'},
+        {label:'Research & Critical Thinking',color:'marigold'},
+        {label:'Coaching & Feedback',color:'marigold'},
+        {label:'Cross-Functional Collaboration',color:'sage'}
+      ]
+    },
+    'sigma-tau': {
+      role: 'Vice President, Sigma Tau Delta',
+      org: 'English Honor Society · Aug 2018 – May 2019',
+      body: 'Served as VP of the English honor society, helping organize events that promoted literacy and writing — Shakespeare Trivia Night, National Writers\' Day celebrations, Absolutely Incredible Kid Day. Early practice in community building around a shared passion.',
+      skills: [
+        {label:'Leadership',color:'raspberry'},
+        {label:'Community Building',color:'raspberry'},
+        {label:'Literacy Advocacy',color:'marigold'},
+        {label:'Project & Editorial Management',color:'marigold'},
+        {label:'Cross-Functional Collaboration',color:'sage'}
+      ]
+    },
+    'scribblers': {
+      role: 'President, Scribblers\' Circle',
+      org: 'Writing Club · Aug 2017 – May 2019',
+      body: 'Founded and led a writing club where members regularly gathered to critique each other\'s portfolios with respectful, constructive feedback. Running a creative community taught facilitation, editorial diplomacy, and how to make people feel safe enough to share imperfect work.',
+      skills: [
+        {label:'Leadership',color:'raspberry'},
+        {label:'Community Building',color:'raspberry'},
+        {label:'Workshop Facilitation',color:'marigold'},
+        {label:'Coaching & Feedback',color:'marigold'},
+        {label:'Editorial Leadership',color:'sage'}
+      ]
+    },
+    'ftwk': {
+      role: 'Managing Editor, From the Writers\' Kitchen',
+      org: 'UF Literary Magazine · Aug 2017 – May 2019',
+      body: 'Co-managed UF\'s in-house student literary magazine — run by students, for students. Handled editorial selection, layout coordination, and publication. Two years of managing a creative publication built habits of editorial consistency and collaborative decision-making.',
+      skills: [
+        {label:'Editorial Leadership',color:'raspberry'},
+        {label:'Project & Editorial Management',color:'raspberry'},
+        {label:'Leadership',color:'marigold'},
+        {label:'Storytelling & Narrative',color:'marigold'},
+        {label:'Cross-Functional Collaboration',color:'sage'}
+      ]
+    },
+    'education': {
+      role: 'BA, English Creative Writing — Cum Laude',
+      org: 'University of Findlay · Findlay, OH · May 2019',
+      body: 'A foundation in story — how to build one, sustain it, and make it matter. Creative writing training sharpened the instinct for narrative structure, voice, and clarity that now drives every piece of content strategy. Graduated with honors, 3.66 GPA.',
+      skills: [
+        {label:'Storytelling & Narrative',color:'raspberry'},
+        {label:'Editorial Leadership',color:'raspberry'},
+        {label:'Research & Critical Thinking',color:'marigold'},
+        {label:'Editing & Proofreading',color:'marigold'},
+        {label:'Independent Work & Initiative',color:'sage'}
+      ]
+    },
+    'awards': {
+      role: 'Writing Awards',
+      org: 'University of Findlay · 2017 & 2019',
+      body: 'Recipient of the R.L. Gebhardt Award for Outstanding Writing in a 2nd Writing Course (2017) — chosen by committee for outstanding writing throughout coursework. Two-time recipient of the G.G. Bruer Award for Prose Fiction (2017 & 2019) — given to a student whose creative prose submission to the campus literary magazine was selected by a faculty panel. Winning it twice means the first time wasn\'t an accident.',
+      skills: [
+        {label:'Storytelling & Narrative',color:'raspberry'},
+        {label:'Editorial Leadership',color:'raspberry'},
+        {label:'Research & Critical Thinking',color:'marigold'}
+      ]
+    }
+  };
+
+  const tabDefaults = {
+    professional: 'bizlib-content',
+    early: 'infostreams',
+    campus: 'uf-internship'
+  };
+
+  function switchTab(tab, btn) {
+    document.querySelectorAll('.exp-tab').forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.exp-panel').forEach(p => p.classList.add('hidden'));
+    document.getElementById('panel-' + tab).classList.remove('hidden');
+    document.querySelectorAll('.exp-item').forEach(i => i.classList.remove('active'));
+    const defaultKey = tabDefaults[tab];
+    const firstItem = document.querySelector('#panel-' + tab + ' .exp-item');
+    if (firstItem) firstItem.classList.add('active');
+    showExpByKey(defaultKey);
+  }
+
+  function showExp(key, el) {
+    document.querySelectorAll('.exp-item').forEach(i => i.classList.remove('active'));
+    if (el) el.classList.add('active');
+    showExpByKey(key);
+  }
+
+  function showExpByKey(key) {
+    const data = experiences[key];
+    if (!data) return;
+    const pane = document.getElementById('exp-detail-pane');
+    pane.innerHTML = `
+      <div class="exp-detail-role">${data.role}</div>
+      <div class="exp-detail-org">${data.org}</div>
+      <p class="exp-detail-body">${data.body}</p>
+      <div class="skills-label">Skills built here</div>
+      <div class="skill-tags">${data.skills.map(s=>`<span class="skill-tag ${s.color}">${s.label}</span>`).join('')}</div>
+    `;
+  }
+
+  // Fade in on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
