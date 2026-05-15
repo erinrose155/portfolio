@@ -538,7 +538,7 @@
   .about-photo {
     position: absolute;
     border-radius: var(--radius);
-    border: 10px solid;
+    border: 3px solid;
     overflow: hidden;
     box-shadow: 0 4px 20px rgba(44,44,42,0.12);
   }
@@ -603,6 +603,99 @@
     transition: opacity 0.6s ease, transform 0.6s ease;
   }
   .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── RESPONSIVE ──────────────────────────────────────── */
+  @media (max-width: 768px) {
+
+    /* Nav */
+    nav {
+      padding: 0 1.25rem;
+      height: auto;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      padding-top: 0.875rem;
+      padding-bottom: 0.875rem;
+    }
+    .nav-links {
+      gap: 1rem;
+      font-size: 0.8rem;
+      flex-wrap: wrap;
+    }
+
+    /* Container */
+    .container { padding: 0 1.25rem; }
+    section { padding: 4rem 0; }
+
+    /* Hero */
+    .hero-inner {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+      padding: 0 1.25rem;
+    }
+    #hero { padding-top: calc(var(--nav-h) + 1rem); }
+    .hero-headline { font-size: 2.5rem; }
+    .hero-stats {
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+    }
+    .stat-num { font-size: 2rem; }
+    .hero-confetti { display: none; }
+
+    /* Experience explorer */
+    .exp-tabs { flex-wrap: wrap; gap: 4px; }
+    .exp-tab { font-size: 0.8rem; padding: 0.6rem 1rem; }
+    .experience-grid {
+      grid-template-columns: 1fr;
+    }
+    .exp-list {
+      border-right: none;
+      border-bottom: 1px solid var(--cream-dark);
+      max-height: 220px;
+    }
+    .exp-detail { padding: 1.5rem; }
+
+    /* Work grid */
+    .work-grid {
+      grid-template-columns: 1fr;
+    }
+
+    /* About */
+    .about-grid {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+    .about-visual {
+      height: 320px;
+    }
+    .about-photo-1 { width: 200px; height: 160px; top: 0; left: 0; }
+    .about-photo-2 { width: 150px; height: 150px; top: 30px; right: 0; }
+    .about-photo-3 { width: 180px; height: 140px; bottom: 0; left: 20px; }
+
+    /* Employers */
+    #employers .container { padding: 0 1.25rem; }
+    .brand-statement { font-size: 1.05rem; padding: 1.25rem 1.5rem; }
+
+    /* Footer */
+    .footer-links { flex-wrap: wrap; gap: 1rem; justify-content: center; }
+
+    /* Hobby chips */
+    .hobby-chips { gap: 0.4rem; }
+    .hobby-chip { font-size: 0.8rem; }
+  }
+
+  @media (max-width: 480px) {
+    .nav-links li:not(:last-child) { display: none; }
+    .hero-headline { font-size: 2.1rem; }
+    .hero-actions { flex-direction: column; }
+    .btn { width: 100%; justify-content: center; }
+    .hero-stats { grid-template-columns: 1fr 1fr; }
+    .stat-card { padding: 1rem; }
+    .section-headline { font-size: 1.75rem; }
+    .about-visual { height: 280px; }
+    .about-photo-1 { width: 170px; height: 140px; }
+    .about-photo-2 { width: 130px; height: 130px; }
+    .about-photo-3 { width: 155px; height: 120px; }
+  }
 </style>
 </head>
 <body>
@@ -640,7 +733,7 @@
         to prove it.
       </h1>
       <p class="hero-body">
-        Content-obsessed marketer turning complex ideas into narratives that are clear, compelling, and actually true — across the full funnel. Creative instinct informed by analysis. Story defended by data.
+        Content-obsessed marketer turning complex ideas into narratives that are clear, compelling, and actually true — across the full funnel. Creative instinct informed by analysis. Data defended by story.
       </p>
       <div class="hero-actions">
         <a href="#experience" class="btn btn-primary">Explore my work</a>
@@ -659,7 +752,7 @@
       </div>
       <div class="stat-card accent-sage">
         <div class="stat-num">#1</div>
-        <div class="stat-label">email driver of site traffic</div>
+        <div class="stat-label">email driver of site traffic, Q1 2026</div>
       </div>
       <div class="stat-card accent-ink">
         <div class="stat-num">50%+</div>
@@ -674,8 +767,8 @@
   <div class="container">
     <div class="section-header fade-in">
       <div class="section-eyebrow">Career Arc</div>
-      <h2 class="section-headline">Not just where I've worked —<br>but the career I'm building.</h2>
-      <p class="section-sub">Click into any role to see the skills underneath it. My post-grad profession may only span 4+ years, but I've been honing these skills for a long, long time.</p>
+      <h2 class="section-headline">Not just what I did —<br>what I built.</h2>
+      <p class="section-sub">Click into any role to see the skills underneath it. This is a career built on purpose, not accident.</p>
     </div>
 
     <!-- Tab bar -->
@@ -801,13 +894,13 @@
     </div>
 
     <div class="work-grid fade-in">
-      <a href="blog-ai-rollout.html" class="work-card" style="display:block; text-decoration:none; color:inherit;">
+      <div class="work-card">
         <div class="work-card-thumb bg-raspberry">Blog Post</div>
         <div class="work-card-body">
           <div class="work-card-type">Content · BizLibrary</div>
-          <div class="work-card-title">AI Rollout for HR & L&D</div>
-          <div class="work-card-desc">A Practical Implementation Plan</div>
-        </a>
+          <div class="work-card-title">Coming soon</div>
+          <div class="work-card-desc">Blog samples to be added.</div>
+        </div>
       </div>
       <div class="work-card">
         <div class="work-card-thumb bg-marigold">Email</div>
