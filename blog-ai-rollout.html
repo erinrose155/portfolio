@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Rollout for HR & L&D — Erin Weirrick</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream:      #FAF6EF;
+    --cream-dark: #F0E9DC;
+    --raspberry:  #C8385A;
+    --raspberry-light: #F5D0D8;
+    --marigold:   #F0A500;
+    --marigold-light: #FDE8B0;
+    --sage:       #6BAA8E;
+    --sage-light: #D4EDE4;
+    --ink:        #2C2C2A;
+    --ink-mid:    #5a5040;
+    --ink-light:  #9a9080;
+    --font-serif: 'DM Serif Display', Georgia, serif;
+    --font-sans:  'DM Sans', system-ui, sans-serif;
+    --radius: 12px;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--raspberry); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  nav {
+    position: sticky; top: 0;
+    background: var(--cream);
+    border-bottom: 1px solid var(--cream-dark);
+    padding: 1rem 2.5rem;
+    display: flex; align-items: center; justify-content: space-between;
+    z-index: 100;
+  }
+  .nav-logo { font-family: var(--font-serif); font-size: 1.1rem; color: var(--ink); text-decoration: none; }
+  .nav-logo span { color: var(--raspberry); }
+  .nav-back { font-size: 0.875rem; color: var(--ink-mid); display: flex; align-items: center; gap: 0.4rem; text-decoration: none; }
+  .nav-back:hover { color: var(--raspberry); text-decoration: none; }
+
+  .article-wrap { max-width: 740px; margin: 0 auto; padding: 4rem 2rem 6rem; }
+
+  .article-meta { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 2rem; flex-wrap: wrap; }
+  .meta-tag {
+    font-size: 0.75rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 0.3rem 0.85rem; border-radius: 100px;
+    background: var(--raspberry-light); color: var(--raspberry);
+  }
+  .meta-tag.sage { background: var(--sage-light); color: #2a6b54; }
+  .meta-tag.marigold { background: var(--marigold-light); color: #7a5200; }
+  .meta-date, .meta-read { font-size: 0.85rem; color: var(--ink-light); }
+
+  .article-headline {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 4vw, 3rem);
+    line-height: 1.1; letter-spacing: -0.02em;
+    color: var(--ink); margin-bottom: 1.5rem;
+  }
+
+  .byline {
+    display: flex; align-items: center; gap: 0.75rem;
+    margin-bottom: 2.5rem; padding-bottom: 2.5rem;
+    border-bottom: 1px solid var(--cream-dark);
+  }
+  .byline-avatar {
+    width: 40px; height: 40px; border-radius: 50%;
+    background: var(--raspberry);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-serif); font-size: 1rem; color: white; flex-shrink: 0;
+  }
+  .byline-name { font-size: 0.9rem; font-weight: 500; color: var(--ink); }
+  .byline-title { font-size: 0.8rem; color: var(--ink-light); }
+
+  .original-banner {
+    background: var(--marigold-light); border: 1px solid var(--marigold);
+    border-radius: var(--radius); padding: 1rem 1.25rem;
+    font-size: 0.875rem; color: var(--ink-mid);
+    margin-bottom: 2.5rem; display: flex; align-items: center; gap: 0.75rem;
+  }
+  .original-banner a { color: #7a5200; font-weight: 500; }
+
+  .summary-box {
+    background: white; border: 1px solid var(--cream-dark);
+    border-left: 4px solid var(--raspberry);
+    border-radius: var(--radius); padding: 1.5rem 1.75rem; margin-bottom: 2.5rem;
+  }
+  .summary-box-label {
+    font-size: 0.72rem; font-weight: 500; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--raspberry); margin-bottom: 0.75rem;
+  }
+  .summary-box ul { padding-left: 1.25rem; }
+  .summary-box li { font-size: 0.9375rem; color: var(--ink-mid); line-height: 1.7; margin-bottom: 0.5rem; }
+
+  .article-body p { font-size: 1.0625rem; color: var(--ink-mid); line-height: 1.8; margin-bottom: 1.5rem; }
+  .article-body h2 {
+    font-family: var(--font-serif); font-size: 1.75rem;
+    color: var(--ink); line-height: 1.2; letter-spacing: -0.01em;
+    margin-top: 3rem; margin-bottom: 1rem;
+  }
+  .article-body h3 { font-size: 1rem; font-weight: 500; color: var(--ink); margin-top: 1.5rem; margin-bottom: 0.5rem; }
+  .article-body ul, .article-body ol { padding-left: 1.5rem; margin-bottom: 1.5rem; }
+  .article-body li { font-size: 1.0625rem; color: var(--ink-mid); line-height: 1.75; margin-bottom: 0.4rem; }
+  .article-body strong { color: var(--ink); font-weight: 500; }
+
+  .pull-quote {
+    font-family: var(--font-serif); font-size: 1.375rem; font-style: italic;
+    line-height: 1.5; color: var(--raspberry);
+    border-left: 3px solid var(--raspberry);
+    padding: 0.5rem 0 0.5rem 1.5rem; margin: 2.5rem 0;
+  }
+
+  .phase-box {
+    background: white; border: 1px solid var(--cream-dark);
+    border-radius: var(--radius); padding: 1.5rem 1.75rem; margin: 1.25rem 0;
+  }
+  .phase-label { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.4rem; }
+  .phase-label.raspberry { color: var(--raspberry); }
+  .phase-label.marigold  { color: #7a5200; }
+  .phase-label.sage      { color: #2a6b54; }
+  .phase-box p { font-size: 0.9375rem; color: var(--ink-mid); margin-bottom: 0; }
+
+  footer {
+    background: var(--cream); border-top: 1px solid var(--cream-dark);
+    padding: 2.5rem; text-align: center;
+  }
+  .footer-name { font-family: var(--font-serif); font-size: 1.25rem; color: var(--ink); margin-bottom: 0.25rem; }
+  .footer-sub { font-size: 0.85rem; color: var(--ink-light); }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Erin <span>Weirrick</span></a>
+  <a href="index.html#work" class="nav-back">← Back to work samples</a>
+</nav>
+
+<div class="article-wrap">
+
+  <div class="article-meta">
+    <span class="meta-tag">Blog Post</span>
+    <span class="meta-tag sage">AI Strategy</span>
+    <span class="meta-tag marigold">BizLibrary</span>
+    <span class="meta-date">Feb 25, 2026</span>
+    <span class="meta-read">· 9 min read</span>
+  </div>
+
+  <h1 class="article-headline">AI Rollout for HR &amp; L&amp;D: Practical Guide + Implementation Template</h1>
+
+  <div class="byline">
+    <div class="byline-avatar">E</div>
+    <div>
+      <div class="byline-name">Erin Weirrick</div>
+      <div class="byline-title">Content &amp; Campaigns Specialist · BizLibrary</div>
+    </div>
+  </div>
+
+  <div class="original-banner">
+    <span>🔗</span>
+    <span>Originally published on BizLibrary.com — <a href="https://www.bizlibrary.com/blog/organizational-culture/template-ai-rollouts-practical-guide/" target="_blank" rel="noopener">view the live article</a></span>
+  </div>
+
+  <div class="summary-box">
+    <div class="summary-box-label">At a glance</div>
+    <ul>
+      <li>88% of organizations are already using generative AI in at least one function, but most are stuck in pilot mode. If you don't create guardrails, "shadow AI" will.</li>
+      <li>69% of leaders say human-machine collaboration is critical, yet only 23% are actively reinventing work around it.</li>
+      <li>This 90-day plan keeps you out of the panic extremes — start small, add literacy training, document QA, and scale only what proves value.</li>
+      <li>Train for literacy, not just usage. Confidence without education creates risk. Informed users create value.</li>
+      <li>When the average data breach costs $4.4M, a little documentation suddenly feels very attractive.</li>
+    </ul>
+  </div>
+
+  <div class="article-body">
+
+    <p>If the phrase "enterprise AI rollout" makes you want to fake a WiFi outage and disappear for a week, you are not alone.</p>
+
+    <p>Right now, AI is everywhere. Your CEO read one McKinsey article and now wants a strategy. Your managers are experimenting with ChatGPT in secret. Your compliance team is sweating. And somehow HR and L&amp;D are expected to have all the answers while still Googling "what is a hallucination in AI" at 10 p.m.</p>
+
+    <p>Take a pause. That is exactly why we created the Artificial Intelligence Implementation Roadmap: An AI Rollout Guide for People &amp; Development. It gives you a phased, sane, structured way to start small, reduce risk, and scale responsibly. No hype. No apocalypse energy. No "move fast and break everything" nonsense.</p>
+
+    <div class="pull-quote">"Boring governance prevents exciting headlines. And exciting headlines are rarely the good kind."</div>
+
+    <h2>AI in the Workplace: The Pressure Is Real</h2>
+
+    <p>According to McKinsey's 2025 State of AI report, 88% of organizations report regularly using generative AI in at least one business function — however, most are still stuck in pilot phases and have not scaled deeply across the enterprise.</p>
+
+    <p>Deloitte's 2025 Human Capital Trends research shows that 69% of respondents recognize the importance of reinventing the employee value proposition to reflect increased human-machine collaboration. Yet only 23% have efforts underway. Meanwhile, a majority of workers feel uncertain or concerned about AI's impact on their jobs.</p>
+
+    <p>So we have rapid adoption, executive urgency, employee anxiety, uneven knowledge, and almost no guardrails. And guess who gets handed the governance clipboard?</p>
+
+    <h2>Why HR and L&amp;D Need a Structured AI Rollout Plan</h2>
+
+    <p>AI is already showing up in your organization. That is not speculation. That is statistical reality. People are drafting emails, writing announcements, asking questions about how to give feedback, uploading documents, and creating training outlines — all without clear guidance.</p>
+
+    <p>Without structure, that turns into shadow AI. Shadow AI turns into inconsistent practices. Inconsistent practices turn into risk. The rollout guide is designed to prevent that spiral before it starts — adding structure before things get messy, and defining boundaries early instead of investigating data exposure later.</p>
+
+    <h2>What This AI Rollout Guide Actually Does</h2>
+
+    <p>This is not a "download this and become an AI futurist" resource. It is a 90-day roadmap through three distinct phases:</p>
+
+    <div class="phase-box">
+      <div class="phase-label raspberry">Days 1–30</div>
+      <h3>Clarity, Guardrails, and Low-Risk Wins</h3>
+      <p>Reduce fear, reduce shadow usage, align leadership, and build confidence without gambling with sensitive data. Start with pilots like drafting learning objectives or generating quiz questions reviewed by humans. This phase keeps you out of the "we banned everything" camp and out of the "everyone do whatever you want" camp.</p>
+    </div>
+
+    <div class="phase-box">
+      <div class="phase-label marigold">Days 31–60</div>
+      <h3>Pilot and Operationalize</h3>
+      <p>AI stops being a vibe and starts being a managed capability. Address resistance head-on with small group discussions about ethical concerns, environmental impact, and professional identity fears — because yes, your team has feelings about this. And ignoring that would be not strategic.</p>
+    </div>
+
+    <div class="phase-box">
+      <div class="phase-label sage">Days 61–90</div>
+      <h3>Scale Intentionally</h3>
+      <p>Evaluate pilot outcomes with real data — not vibes. Decide what to expand, adjust, or sunset. By Day 90, you have an AI Acceptable Use Policy, an L&amp;D AI Playbook, a QA review checklist, a clear escalation path, defined required vs. optional usage, and an ongoing training plan.</p>
+    </div>
+
+    <h2>The Real Purpose of This Guide</h2>
+
+    <p>HR, L&amp;D, and Safety teams are already stretched. This guide exists to help you pause the panic and give you room to plan. It helps you lead with a plan instead of reacting to the loudest headline or the most excited executive in the room.</p>
+
+    <p>AI adoption done well positions People and Development as thoughtful instead of rushed, careful with risk, fair and consistent, and practical about what's useful and what's not. You move from "we're trying to keep up" to "we are designing how this gets implemented." That shift matters.</p>
+
+    <h2>What Success Actually Looks Like</h2>
+
+    <p>You want to be able to come to your executive team and say: "We reduced asset build time by 25 percent. We maintained QA standards. We had zero policy breaches. Confidence increased across the team." That is disciplined modernization — and tracking it doesn't require new software. Most of the data you need is already sitting in your LMS, your project management tool, and your engagement surveys. You just aren't labeling it "AI impact" yet.</p>
+
+    <h2>Final Thoughts</h2>
+
+    <p>AI is not going away. Ignoring it will not make it quieter. Banning it outright will not make it safer. What will help is structure, transparency, governance, and measured experimentation.</p>
+
+    <p>This rollout guide gives you a way to start small, test safely, and scale what actually works. You do not need to become a machine learning engineer. You need to become a calm, credible leader in the middle of a noisy moment.</p>
+
+    <div class="pull-quote">"Doesn't that sound just like the role People Operations has always played?"</div>
+
+  </div>
+</div>
+
+<footer>
+  <div class="footer-name">Erin Weirrick</div>
+  <div class="footer-sub">Content Strategist &amp; B2B Story Engineer</div>
+</footer>
+
+</body>
+</html>
