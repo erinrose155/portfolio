@@ -466,18 +466,30 @@
   #employers .section-eyebrow { color: var(--marigold); }
   #employers .section-headline { color: var(--cream); }
   #employers .section-sub { color: var(--ink-light); }
-  .brand-statement {
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(255,255,255,0.1);
-    border-left: 4px solid var(--raspberry);
-    border-radius: var(--radius-sm);
-    padding: 1.75rem 2rem;
-    font-family: var(--font-serif);
-    font-size: 1.25rem;
-    font-style: italic;
-    line-height: 1.6;
-    color: var(--cream);
-    margin-bottom: 2.5rem;
+  .employers-blocks {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+  }
+  .employers-block {
+    border-radius: var(--radius);
+    padding: 2rem 2.25rem;
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+  .raspberry-block { border-left: 4px solid var(--raspberry); background: rgba(255,255,255,0.04); }
+  .marigold-block  { border-left: 4px solid var(--marigold);  background: rgba(255,255,255,0.04); }
+  .employers-block-eyebrow {
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 0.85rem;
+  }
+  .employers-block-body {
+    font-size: 0.9375rem;
+    color: var(--ink-light);
+    line-height: 1.8;
+    margin-bottom: 1.25rem;
   }
   .role-tags {
     display: flex;
@@ -485,6 +497,52 @@
     gap: 0.75rem;
     margin-bottom: 2.5rem;
   }
+  .philosophy-block {
+    background: var(--cream-dark);
+    border-radius: var(--radius);
+    padding: 2rem 2.25rem;
+    margin-top: 1.75rem;
+  }
+  .philosophy-eyebrow {
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--marigold);
+    margin-bottom: 0.6rem;
+  }
+  .philosophy-headline {
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    color: var(--cream);
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+  .philosophy-body {
+    font-size: 1rem;
+    color: var(--ink-light);
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+    max-width: 600px;
+  }
+  .btn-philosophy {
+    display: inline-flex;
+    align-items: center;
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding: 0.8rem 1.75rem;
+    border-radius: 100px;
+    background: var(--marigold);
+    color: var(--ink);
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+  }
+  .btn-philosophy:hover { background: #d49000; transform: translateY(-1px); }
+  .btn-full { width: 100%; justify-content: center; font-size: 1rem; padding: 1.1rem 2rem; background: var(--marigold); color: var(--ink); }
+  .btn-full:hover { background: #d49000; transform: translateY(-1px); }
   .role-tag {
     font-size: 0.875rem;
     padding: 0.5rem 1.25rem;
@@ -674,6 +732,7 @@
     /* Employers */
     #employers .container { padding: 0 1.25rem; }
     .brand-statement { font-size: 1.05rem; padding: 1.25rem 1.5rem; }
+    .employers-blocks { grid-template-columns: 1fr; }
 
     /* Footer */
     .footer-links { flex-wrap: wrap; gap: 1rem; justify-content: center; }
@@ -736,7 +795,7 @@
         Content-obsessed marketer turning complex ideas into narratives that are clear, compelling, and actually true — across the full funnel. Creative instinct informed by analysis. Story defended by data.
       </p>
       <div class="hero-actions">
-        <a href="#experience" class="btn btn-primary">Explore my work</a>
+        <a href="#experience" class="btn btn-primary">Explore my career</a>
         <a href="#employers" class="btn btn-secondary">For employers</a>
       </div>
     </div>
@@ -959,15 +1018,13 @@
 <!-- FOR EMPLOYERS -->
 <section id="employers">
   <div class="container">
-    <div class="section-header fade-in">
+    <div class="section-header fade-in" style="margin-bottom:1.75rem;">
       <div class="section-eyebrow">For Employers</div>
       <h2 class="section-headline">What you're actually hiring.</h2>
       <p class="section-sub" style="color:var(--ink-light);">The honest version of what I bring, what I'm looking for, and whether we're a fit.</p>
     </div>
-    <div class="fade-in">
-      <div class="brand-statement">
-        "Content-obsessed marketer skilled at turning complex ideas into narratives that are clear, compelling, and actually true across the full funnel. I lead with creative instinct that is informed by analysis and defend every decision with data — even though numbers aren't my favorite part of the job. I love finding the story they tell."
-      </div>
+
+    <div class="fade-in" style="margin-bottom:2rem;">
       <div style="font-size:0.8125rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-light);margin-bottom:0.75rem;">Roles I'm targeting</div>
       <div class="role-tags">
         <span class="role-tag">Content Marketing Manager</span>
@@ -975,8 +1032,24 @@
         <span class="role-tag">Senior Content Strategist</span>
         <span class="role-tag">Managing Editor</span>
       </div>
-      <a href="mailto:erinrose155@gmail.com" class="btn btn-primary" style="margin-top:1rem;">Let's talk →</a>
     </div>
+
+    <div class="fade-in employers-blocks">
+      <div class="employers-block raspberry-block">
+        <div class="employers-block-eyebrow" style="color:var(--raspberry-light);">Who I actually am at work</div>
+        <p class="employers-block-body">I am often the person with a different perspective — and I know exactly what I need to do my best work: a communicative and collaborative team, trust, and agency. I am like a wind-up toy. Give me the prompt, let me loose, and at the end I'll walk you through exactly how I got there <em>à la</em> Charlie in <em>It's Always Sunny in Philadelphia</em>. If your team needs a little whimsical chaos who also happens to be extremely passionate about proving results — I might be available 😜</p>
+      </div>
+
+      <div class="employers-block marigold-block" style="border-left-color: var(--sage);">
+        <div class="employers-block-eyebrow" style="color:var(--sage);">A word on B2B</div>
+        <p class="employers-block-body">B2B marketing doesn't have to be boring. Even before AI introduced the Ultimate Sameness to nearly every B2B SaaS presence in the market, B2B marketing was sanded down and made 'safe' in the process of how it gets made. I am not interested in marketing to 'businesses' — what I AM interested in is marketing to people at work. We spend 30% of our lives there. It should at least be intriguing.</p>
+      </div>
+    </div>
+
+    <div class="fade-in" style="margin-top:1.5rem;">
+      <a href="mailto:erinrose155@gmail.com?subject=Let's un-boring some B2B" class="btn btn-philosophy btn-full">Un-boring your B2B →</a>
+    </div>
+
   </div>
 </section>
 
